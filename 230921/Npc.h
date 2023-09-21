@@ -14,5 +14,7 @@ public:
 	void		LateUpdate() override;
 	void		Release() override;
 	void		Render(HDC hDC) const override;
+
+	void		Crash(CObj* _pOther) override;
 };
 

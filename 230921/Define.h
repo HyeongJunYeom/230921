@@ -21,7 +21,13 @@ typedef struct tagInfo
 } INFO;
 
 enum DIRECTION { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_END};
-enum OBJID {OBJ_PLAYER, OBJ_MONSTER, OBJ_BULLET, OBJ_END};
+enum OBJID {OBJ_PLAYER, OBJ_MONSTER, OBJ_BULLET, OBJ_NPC, OBJ_END};
+
+template <typename T>
+T		Square(T x)
+{
+	return x * x;
+}
 
 template <typename T>
 void		Safe_Delete(T& p)

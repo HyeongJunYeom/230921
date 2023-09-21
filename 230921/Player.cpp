@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Monster.h"
+#include "Npc.h"
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()
@@ -23,6 +24,9 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if (m_bDead)
+		return OBJ_DEAD;
+
 	Key_Input();
 
 	__super::Update_Rect();

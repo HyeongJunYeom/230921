@@ -3,6 +3,7 @@
 #include "AbstractFactory.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Npc.h"
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount()), m_iFps(0)
@@ -21,6 +22,7 @@ void CMainGame::Initilize()
 
 	m_ObjList[OBJ_PLAYER].push_back(CAbstractFactory<CPlayer>::CreateObj());
 	m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::CreateObj());
+	m_ObjList[OBJ_NPC].push_back(CAbstractFactory<CNpc>::CreateObj());
 	dynamic_cast<CPlayer*>(m_ObjList[OBJ_PLAYER].front())->Set_Bullet_List(&m_ObjList[OBJ_BULLET]);
 }
 
@@ -61,6 +63,15 @@ void CMainGame::LateUpdate()
 		{
 			(*iterBullet)->Crash(*iterMonster);
 			(*iterMonster)->Crash(*iterBullet);
+		}
+	}
+
+	for (auto iterPlayer = m_ObjList[OBJ_PLAYER].begin(); iterPlayer != m_ObjList[OBJ_PLAYER].end(); ++iterPlayer)
+	{
+		for (auto iterNpc = m_ObjList[OBJ_NPC].begin(); iterNpc != m_ObjList[OBJ_NPC].end(); ++iterNpc)
+		{
+			(*iterPlayer)->Crash(*iterNpc);
+			(*iterNpc)->Crash(*iterPlayer);
 		}
 	}
 }
