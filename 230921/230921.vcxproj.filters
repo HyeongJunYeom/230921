@@ -34,6 +34,30 @@
     <Filter Include="소스 파일\01. Obj\03. Npc">
       <UniqueIdentifier>{f275c460-e083-4ce7-86d3-04c826ecfaec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Obj\04. Item">
+      <UniqueIdentifier>{ae8439d4-324f-471f-8821-b3ea5b4fd616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Obj\04. Item\00. AssistPlayer">
+      <UniqueIdentifier>{a9f9bd62-61a6-45b0-a08a-1f2a34365a80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Interface">
+      <UniqueIdentifier>{642bc361-db90-46e3-b58d-fb3589a67428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Interface\01. ItemEquip">
+      <UniqueIdentifier>{965fe0ec-b298-4076-b7a4-2171015ac98c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Interface\02. Fps">
+      <UniqueIdentifier>{eeca2b11-9d91-409b-b58e-d56dd7f34f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04. Stage">
+      <UniqueIdentifier>{6d84bd3e-e2fd-4006-86d0-1c4ae994c5b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Interface\00. PlayerStatus">
+      <UniqueIdentifier>{723b55fd-54b3-4bfc-9ff5-5e3ed9ea22c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Obj\05. SupplyPlane">
+      <UniqueIdentifier>{7c8e25de-f48f-417b-839d-605bb5c280f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -75,6 +99,27 @@
     <ClInclude Include="Npc.h">
       <Filter>소스 파일\01. Obj\03. Npc</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>소스 파일\01. Obj\04. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="AssistPlayer.h">
+      <Filter>소스 파일\01. Obj\04. Item\00. AssistPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>소스 파일\03. Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStatus.h">
+      <Filter>소스 파일\03. Interface\00. PlayerStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemEquip.h">
+      <Filter>소스 파일\03. Interface\01. ItemEquip</Filter>
+    </ClInclude>
+    <ClInclude Include="Fps.h">
+      <Filter>소스 파일\03. Interface\02. Fps</Filter>
+    </ClInclude>
+    <ClInclude Include="SupplyPlane.h">
+      <Filter>소스 파일\01. Obj\05. SupplyPlane</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="230921.cpp">
@@ -101,6 +146,27 @@
     <ClCompile Include="Npc.cpp">
       <Filter>소스 파일\01. Obj\03. Npc</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\01. Obj\04. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="AssistPlayer.cpp">
+      <Filter>소스 파일\01. Obj\04. Item\00. AssistPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>소스 파일\03. Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStatus.cpp">
+      <Filter>소스 파일\03. Interface\00. PlayerStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemEquip.cpp">
+      <Filter>소스 파일\03. Interface\01. ItemEquip</Filter>
+    </ClCompile>
+    <ClCompile Include="Fps.cpp">
+      <Filter>소스 파일\03. Interface\02. Fps</Filter>
+    </ClCompile>
+    <ClCompile Include="SupplyPlane.cpp">
+      <Filter>소스 파일\01. Obj\05. SupplyPlane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="230921.rc">
@@ -122,5 +188,6 @@
     <Text Include="숙제.txt">
       <Filter>소스 파일</Filter>
     </Text>
+    <Text Include="Todo List.txt" />
   </ItemGroup>
 </Project>

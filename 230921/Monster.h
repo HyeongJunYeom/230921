@@ -17,4 +17,3 @@ public:
 
 	void		Crash(CObj* _pOther) override;
 };
-

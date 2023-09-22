@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Npc.h"
+#include "Item.h"
+#include "SupplyPlane.h"
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount()), m_iFps(0)
@@ -23,6 +25,7 @@ void CMainGame::Initilize()
 	m_ObjList[OBJ_PLAYER].push_back(CAbstractFactory<CPlayer>::CreateObj());
 	m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::CreateObj());
 	m_ObjList[OBJ_NPC].push_back(CAbstractFactory<CNpc>::CreateObj());
+	m_ObjList[OBJ_SPLY].push_back(CAbstractFactory<CSupplyPlane>::CreateObj());
 	dynamic_cast<CPlayer*>(m_ObjList[OBJ_PLAYER].front())->Set_Bullet_List(&m_ObjList[OBJ_BULLET]);
 }
 
@@ -30,6 +33,8 @@ void CMainGame::Update()
 {
 	if(m_ObjList[OBJ_MONSTER].empty())
 		m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::CreateObj());
+	if(m_ObjList[OBJ_SPLY].empty())
+		m_ObjList[OBJ_SPLY].push_back(CAbstractFactory<CSupplyPlane>::CreateObj());
 	for (auto i = 0; i < OBJ_END; ++i)
 	{
 		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end();)
@@ -51,27 +56,20 @@ void CMainGame::LateUpdate()
 {
 	for (auto i = 0; i < OBJ_END; ++i)
 	{
-		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end(); ++iter)
+		for (auto iterSrc = m_ObjList[i].begin(); iterSrc != m_ObjList[i].end(); ++iterSrc)
 		{
-			(*iter)->LateUpdate();
-		}
-	}
+			(*iterSrc)->LateUpdate();
 
-	for (auto iterBullet = m_ObjList[OBJ_BULLET].begin(); iterBullet != m_ObjList[OBJ_BULLET].end(); ++iterBullet)
-	{
-		for (auto iterMonster = m_ObjList[OBJ_MONSTER].begin(); iterMonster != m_ObjList[OBJ_MONSTER].end(); ++iterMonster)
-		{
-			(*iterBullet)->Crash(*iterMonster);
-			(*iterMonster)->Crash(*iterBullet);
-		}
-	}
-
-	for (auto iterPlayer = m_ObjList[OBJ_PLAYER].begin(); iterPlayer != m_ObjList[OBJ_PLAYER].end(); ++iterPlayer)
-	{
-		for (auto iterNpc = m_ObjList[OBJ_NPC].begin(); iterNpc != m_ObjList[OBJ_NPC].end(); ++iterNpc)
-		{
-			(*iterPlayer)->Crash(*iterNpc);
-			(*iterNpc)->Crash(*iterPlayer);
+			//	충돌 처리 (각각의 리스트와 충돌처리 확인하며 동일 리스트일 시 break;
+			for (auto j = 0; j < OBJ_END; ++j)
+			{
+				for (auto iterDst = m_ObjList[j].begin(); iterDst != m_ObjList[j].end(); ++iterDst)
+				{
+					if (i == j)
+						break;
+					(*iterSrc)->Crash(*iterDst);
+				}
+			}			
 		}
 	}
 }
@@ -106,4 +104,9 @@ void CMainGame::Render()
 
 		m_dwTime = GetTickCount();
 	}
+
+	int iDim = dynamic_cast<CPlayer*>(m_ObjList[OBJ_PLAYER].front())->Get_Demention();
+
+	swprintf_s(szBuf, L"DIM: %d", iDim);
+	TextOut(m_hDC, 10, 10, szBuf, lstrlen(szBuf));
 }

@@ -6,8 +6,9 @@
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()
-	: m_pBulletList(nullptr), m_dwTime(GetTickCount())
+	: m_pBulletList(nullptr), m_dwTime(GetTickCount()), m_iDimention(270)
 {
+	ZeroMemory(&m_tGunPos, sizeof(POS));
 }
 
 CPlayer::~CPlayer()
@@ -19,7 +20,7 @@ void CPlayer::Initialize()
 {
 	m_tInfo = { WINCX * 0.5f, WINCY * 0.5f, 30.f, 30.f };
 
-	m_fSpeed = 6.f;
+	m_fSpeed = 5.f;
 }
 
 int CPlayer::Update()
@@ -28,6 +29,8 @@ int CPlayer::Update()
 		return OBJ_DEAD;
 
 	Key_Input();
+
+	m_tGunPos = Calculate_GunPos();
 
 	__super::Update_Rect();
 
@@ -45,6 +48,9 @@ void CPlayer::Release()
 void CPlayer::Render(HDC hDC) const
 {
 	Ellipse(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+
+	MoveToEx(hDC, m_tInfo.fX, m_tInfo.fY, nullptr);
+	LineTo(hDC, m_tGunPos.fX, m_tGunPos.fY);
 }
 
 void CPlayer::Crash(CObj* _pOther)
@@ -55,17 +61,62 @@ void CPlayer::Key_Input()
 {
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
-		if (m_tRect.right < WINCX - FRAME_SIZE)
-			m_tInfo.fX += m_fSpeed;
+		/*if (GetAsyncKeyState(VK_UP) & 0x8000)
+		{
+			m_tInfo.fX += m_fSpeed / sqrt(2);
+			m_tInfo.fY -= m_fSpeed / sqrt(2);
+		}
+		else if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		{
+			m_tInfo.fX += m_fSpeed / sqrt(2);
+			m_tInfo.fY += m_fSpeed / sqrt(2);
+		}
+		else
+			m_tInfo.fX += m_fSpeed;*/
+		if (360 <= m_iDimention)
+		{
+			m_iDimention -= 360;
+		}
+		++m_iDimention;
 	}
 
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-		if (m_tRect.left > FRAME_SIZE)
-			m_tInfo.fX -= m_fSpeed;
+		/*if (GetAsyncKeyState(VK_UP) & 0x8000)
+		{
+			m_tInfo.fX -= m_fSpeed / sqrt(2);
+			m_tInfo.fY -= m_fSpeed / sqrt(2);
+		}
+		else if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		{
+			m_tInfo.fX -= m_fSpeed / sqrt(2);
+			m_tInfo.fY += m_fSpeed / sqrt(2);
+		}
+		else
+			m_tInfo.fX -= m_fSpeed;*/
+
+		if (0 >= m_iDimention)
+		{
+			m_iDimention += 360;
+		}
+		--m_iDimention;
 	}
 
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	{
+		//	³ôÀÌ = ºøº¯ * sin µð¸à¼Ç
+
+		//	¹Øº¯ = ºøº¯ * cos dimention
+		m_tInfo.fX += m_fSpeed * cos(m_iDimention * PI / 180);
+		m_tInfo.fY += m_fSpeed * sin(m_iDimention * PI / 180);
+	}
+
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	{
+		m_tInfo.fY += m_fSpeed;
+	}
+
+	/*if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
 		if (m_tRect.top > FRAME_SIZE)
 			m_tInfo.fY -= m_fSpeed;
@@ -75,9 +126,9 @@ void CPlayer::Key_Input()
 	{
 		if(m_tRect.bottom < WINCY - FRAME_SIZE)
 			m_tInfo.fY += m_fSpeed;
-	}
+	}*/
 
-	if (m_dwTime + 100 < GetTickCount())
+	/*if (m_dwTime + 100 < GetTickCount())
 	{
 		if (GetAsyncKeyState(0x57) & 0x8000)
 		{
@@ -102,6 +153,27 @@ void CPlayer::Key_Input()
 			m_pBulletList->push_back(CAbstractFactory<CBullet>::CreateObj(m_tInfo.fX, m_tInfo.fY, DIR_RIGHT));
 			m_dwTime = GetTickCount();
 		}
+	}*/
+
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	{
+		if (m_dwTime + 100 < GetTickCount())
+		{
+			m_pBulletList->push_back(CAbstractFactory<CBullet>::CreateObj(m_tGunPos.fX, m_tGunPos.fY, m_iDimention));
+
+			m_dwTime = GetTickCount();
+		}
+	}
+
+	if (GetAsyncKeyState('Q') & 0x8000)
+	{
+		if (m_dwTime + 100 < GetTickCount())
+		{
+			//m_pBulletList
+			m_pBulletList->push_back(CAbstractFactory<CBullet>::CreateObj(m_tGunPos.fX, m_tGunPos.fY, m_iDimention, BULLET_SPECIAL));
+
+			m_dwTime = GetTickCount();
+		}
 	}
 }
 
@@ -117,4 +189,14 @@ CObj* CPlayer::Create_Bullet(DIRECTION _eDir)
 	pBullet->Set_Direction(_eDir);
 
 	return pBullet;
+}
+
+POS CPlayer::Calculate_GunPos()
+{
+	float fX = ((cos(double(m_iDimention * PI / 180)) * (float)GUN_SIZE) + m_tInfo.fX);
+	float fY = ((sin(double(m_iDimention * PI / 180)) * (float)GUN_SIZE) + m_tInfo.fY);
+
+	POS pos = { fX, fY };
+
+	return pos;
 }

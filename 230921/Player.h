@@ -24,12 +24,17 @@ public:
 		if(_pBulletList)
 			m_pBulletList = _pBulletList;
 	}
+	int			Get_Demention() const { return m_iDimention; }
 
 	void		Key_Input();
 	CObj*		Create_Bullet(DIRECTION _eDir);
 
+	POS			Calculate_GunPos();
+
 private:
 	list<CObj*>*		m_pBulletList;
 	DWORD		m_dwTime;
+	float		m_iDimention;
+	POS			m_tGunPos;	
 };
 
