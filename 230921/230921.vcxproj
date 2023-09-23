@@ -138,6 +138,7 @@
     <ClInclude Include="230921.h" />
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="AssistPlayer.h" />
+    <ClInclude Include="BeamSwrod.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="AssistPlayerItem.h" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="230921.cpp" />
     <ClCompile Include="AssistPlayer.cpp" />
+    <ClCompile Include="BeamSwrod.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="AssistPlayerItem.cpp" />
     <ClCompile Include="Fps.cpp">

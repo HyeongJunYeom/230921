@@ -23,16 +23,23 @@ void CMainGame::Initilize()
 {
 	m_hDC = GetDC(g_hWnd);
 
+	srand(time(NULL));
+
 	m_ObjList[OBJ_PLAYER].push_back(CAbstractFactory<CPlayer>::CreateObj());
+	
+	//	테스트 코드
+	for (int i = 0; i < 3; ++i)
+	{
+		m_ObjList[OBJ_ITEM].push_back(CAbstractFactory<CItem>::CreateObj());
+	}
 	m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::CreateObj());
 	m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::CreateObj());
 	m_ObjList[OBJ_MONSTER].back()->Set_Pos(WINCX - FRAME_SIZE - m_ObjList[OBJ_MONSTER].back()->Get_Info().fCX * 0.5f, WINCY - FRAME_SIZE - m_ObjList[OBJ_MONSTER].back()->Get_Info().fCY * 0.5f);
 	m_ObjList[OBJ_NPC].push_back(CAbstractFactory<CNpc>::CreateObj());
-	m_ObjList[OBJ_SPLY].push_back(CAbstractFactory<CSupplyPlane>::CreateObj());
 	m_ObjList[OBJ_ITEMEFFECT].push_back(CAbstractFactory<CAssistPlayer>::CreateObj());
 
 	dynamic_cast<CPlayer*>(m_ObjList[OBJ_PLAYER].front())->Set_Bullet_List(&m_ObjList[OBJ_BULLET]);
-
+	
 	for (auto iter = m_ObjList[OBJ_ITEMEFFECT].begin(); iter != m_ObjList[OBJ_ITEMEFFECT].end(); ++iter)
 	{
 		dynamic_cast<CItemEffect*>(*iter)->Set_BulletList(&m_ObjList[OBJ_BULLET]);
@@ -43,13 +50,24 @@ void CMainGame::Initilize()
 
 void CMainGame::Update()
 {
+	// 테스트 코드
 	if (m_ObjList[OBJ_MONSTER].size() < 2)
 	{
 		m_ObjList[OBJ_MONSTER].back()->Set_Pos(WINCX - FRAME_SIZE - m_ObjList[OBJ_MONSTER].back()->Get_Info().fCX * 0.5f, WINCY - FRAME_SIZE - m_ObjList[OBJ_MONSTER].back()->Get_Info().fCY * 0.5f);
 		m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::CreateObj());
 	}
-	if(m_ObjList[OBJ_SPLY].empty())
+	if (m_ObjList[OBJ_SPLY].empty())
+	{
 		m_ObjList[OBJ_SPLY].push_back(CAbstractFactory<CSupplyPlane>::CreateObj());
+		dynamic_cast<CSupplyPlane*>(m_ObjList[OBJ_SPLY].front())->Set_ItemList(&m_ObjList[OBJ_ITEM]);
+	}
+
+	/*if (m_ObjList[OBJ_ITEM].size() < 10)
+	{
+		m_ObjList[OBJ_ITEM].push_back(CAbstractFactory<CItem>::CreateObj());
+	}*/
+
+
 	for (auto i = 0; i < OBJ_END; ++i)
 	{
 		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end();)

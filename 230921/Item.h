@@ -29,12 +29,14 @@ private:
 	ITEMTYPE		m_eItemType;
 	float			m_fAngle;
 	int				m_iBoundCount;
+	float			m_fXSpeed;
+	float			m_fYSpeed;
 };
 
 //	아이템은 5번 튕기면 소멸
 //	바운드 카운트로 추적
 
-//	아이템은 튕길때마다 속도가 1씩 줄며 처음속도 10;
+//	아이템은 튕길때마다 속도가 1씩 줄며 처음속도 8;
 
 //	top bottom 충돌시 y축속도 부호반전
 

@@ -126,6 +126,10 @@ void CAssistPlayer::Render(HDC hDC) const
 
 	swprintf_s(szBuf, L"GunAngle2 : %f", m_fGunCurAngle2);
 	TextOutW(hDC, 500, 550, szBuf, lstrlen(szBuf));
+
+	TCHAR szBuf2[] = L"보조플레이어";
+	TextOut(hDC, m_tInfo.fX - m_tInfo.fCX * 3.f, m_tInfo.fY + m_tInfo.fCY * 1.5f, szBuf2, lstrlen(szBuf2));
+	TextOut(hDC, m_tSubInfo.fX - m_tSubInfo.fCX, m_tSubInfo.fY + m_tSubInfo.fCY * 1.5f, szBuf2, lstrlen(szBuf2));
 }
 
 void CAssistPlayer::Update_SubRect()

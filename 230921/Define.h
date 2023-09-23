@@ -17,14 +17,14 @@
 #define			INT_SHOW		0
 #define			INT_HIDE		1
 
-#define			GUN_SIZE		100
+#define			GUN_SIZE		40
 
 #define			ITEMCX		20
 #define			ITEMCY		20
 
 #define			ASSISTCX	20
 #define			ASSISTCY	20
-#define			ASSIST_GUN_SIZE		50
+#define			ASSIST_GUN_SIZE		20
 
 #define			SUPCX		40
 #define			SUPCY		20

@@ -30,5 +30,13 @@ public:
 private:
 	CMonster*			m_pMonster;
 	list<CObj*>*		m_ItemList;
+	int					m_iHitCount;
+
+	DWORD				m_dwHitDelay;
 };
 
+//	2대까지 버티며 맞을때마다 아이템 드랍
+
+//	2대 맞으면 소멸
+
+//	1대 맞으면 0.5 초간 슈퍼아머

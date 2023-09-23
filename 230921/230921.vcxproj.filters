@@ -70,6 +70,9 @@
     <Filter Include="소스 파일\01. Obj\05. ItemEffect\01. Shiled">
       <UniqueIdentifier>{2361bc71-a0e2-4bc0-b989-1dfa97ea0b22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Obj\05. ItemEffect\02. BeamSword">
+      <UniqueIdentifier>{d994b386-4fff-405d-b050-d679c53bdcd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="Shield.h">
       <Filter>소스 파일\01. Obj\05. ItemEffect\01. Shiled</Filter>
     </ClInclude>
+    <ClInclude Include="BeamSwrod.h">
+      <Filter>소스 파일\01. Obj\05. ItemEffect\02. BeamSword</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="230921.cpp">
@@ -202,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="Shield.cpp">
       <Filter>소스 파일\01. Obj\05. ItemEffect\01. Shiled</Filter>
+    </ClCompile>
+    <ClCompile Include="BeamSwrod.cpp">
+      <Filter>소스 파일\01. Obj\05. ItemEffect\02. BeamSword</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

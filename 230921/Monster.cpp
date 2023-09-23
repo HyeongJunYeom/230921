@@ -57,6 +57,9 @@ void CMonster::Release()
 void CMonster::Render(HDC hDC) const
 {
 	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+
+	TCHAR szBuf[] = L"Àû";
+	TextOut(hDC, m_tInfo.fX - m_tInfo.fCX * 0.5f, m_tInfo.fY - m_tInfo.fCY * 1.f, szBuf, lstrlen(szBuf));
 }
 
 void CMonster::Crash(CObj* _pOther)

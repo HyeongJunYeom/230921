@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "Monster.h"
+#include "SupplyPlane.h"
 
 CBullet::CBullet()
 	: m_fAngle(0), m_eBulletType(BULLET_END)
@@ -70,13 +71,24 @@ void CBullet::Crash(CObj* _pOther)
 {
 	CPlayer* pPlayer = dynamic_cast<CPlayer*>(_pOther);
 	CMonster* pMonster = dynamic_cast<CMonster*>(_pOther);
+	CSupplyPlane* pSupply = dynamic_cast<CSupplyPlane*>(_pOther);
 
 	if (pPlayer)
 	{
 
 	}
 
-	/*if (pMonster)
+	if (pSupply)
+	{
+		bool bResult = false;
+		RECT tRect;
+		bResult = IntersectRect(&tRect, &(pSupply->Get_Rect()), &(Get_Rect()));
+
+		if (bResult)
+			m_bDead = true;
+	}
+
+	if (pMonster)
 	{
 		bool bResult = false;
 		RECT tRect;
@@ -84,7 +96,7 @@ void CBullet::Crash(CObj* _pOther)
 
 		if (bResult)
 			m_bDead = true;
-	}*/
+	}
 }
 
 void CBullet::Calculate_SpecialBullet()

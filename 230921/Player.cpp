@@ -6,7 +6,7 @@
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()
-	: m_pBulletList(nullptr), m_dwTime(GetTickCount()), m_iDimention(270)
+	: m_pBulletList(nullptr), m_dwTime(GetTickCount()), m_fAngle(270)
 {
 	ZeroMemory(&m_tGunPos, sizeof(POS));
 }
@@ -73,11 +73,11 @@ void CPlayer::Key_Input()
 		}
 		else
 			m_tInfo.fX += m_fSpeed;*/
-		if (180 <= m_iDimention)
+		if (180 <= m_fAngle)
 		{
-			m_iDimention -= 360;
+			m_fAngle -= 360;
 		}
-		m_iDimention += 5;
+		m_fAngle += 5;
 	}
 
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
@@ -95,11 +95,11 @@ void CPlayer::Key_Input()
 		else
 			m_tInfo.fX -= m_fSpeed;*/
 
-		if (-180 >= m_iDimention)
+		if (-180 >= m_fAngle)
 		{
-			m_iDimention += 360;
+			m_fAngle += 360;
 		}
-		m_iDimention -= 5;
+		m_fAngle -= 5;
 	}
 
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
@@ -107,14 +107,14 @@ void CPlayer::Key_Input()
 		//	³ôÀÌ = ºøº¯ * sin µð¸à¼Ç
 
 		//	¹Øº¯ = ºøº¯ * cos dimention
-		m_tInfo.fX -= m_fSpeed * cos(m_iDimention * PI / 180);
-		m_tInfo.fY -= m_fSpeed * sin(m_iDimention * PI / 180);
+		m_tInfo.fX -= m_fSpeed * cos(m_fAngle * PI / 180);
+		m_tInfo.fY -= m_fSpeed * sin(m_fAngle * PI / 180);
 	}
 
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 	{
-		m_tInfo.fX += m_fSpeed * cos(m_iDimention * PI / 180);
-		m_tInfo.fY += m_fSpeed * sin(m_iDimention * PI / 180);
+		m_tInfo.fX += m_fSpeed * cos(m_fAngle * PI / 180);
+		m_tInfo.fY += m_fSpeed * sin(m_fAngle * PI / 180);
 	}
 
 	/*if (GetAsyncKeyState(VK_UP) & 0x8000)
@@ -160,7 +160,7 @@ void CPlayer::Key_Input()
 	{
 		if (m_dwTime + 100 < GetTickCount())
 		{
-			m_pBulletList->push_back(CAbstractFactory<CBullet>::CreateObj(m_tGunPos.fX, m_tGunPos.fY, m_iDimention));
+			m_pBulletList->push_back(CAbstractFactory<CBullet>::CreateObj(m_tGunPos.fX, m_tGunPos.fY, m_fAngle));
 
 			m_dwTime = GetTickCount();
 		}
@@ -171,7 +171,7 @@ void CPlayer::Key_Input()
 		if (m_dwTime + 100 < GetTickCount())
 		{
 			//m_pBulletList
-			m_pBulletList->push_back(CAbstractFactory<CBullet>::CreateObj(m_tGunPos.fX, m_tGunPos.fY, m_iDimention, BULLET_SPECIAL));
+			m_pBulletList->push_back(CAbstractFactory<CBullet>::CreateObj(m_tGunPos.fX, m_tGunPos.fY, m_fAngle, BULLET_SPECIAL));
 
 			m_dwTime = GetTickCount();
 		}
@@ -192,10 +192,15 @@ CObj* CPlayer::Create_Bullet(DIRECTION _eDir)
 	return pBullet;
 }
 
+void CPlayer::ShotGun()
+{
+	m_fAngle;
+}
+
 POS CPlayer::Calculate_GunPos()
 {
-	float fX = (-(cos(m_iDimention * PI / 180) * (float)GUN_SIZE) + m_tInfo.fX);
-	float fY = (-(sin(m_iDimention * PI / 180) * (float)GUN_SIZE) + m_tInfo.fY);
+	float fX = (-(cos(m_fAngle * PI / 180) * (float)GUN_SIZE) + m_tInfo.fX);
+	float fY = (-(sin(m_fAngle * PI / 180) * (float)GUN_SIZE) + m_tInfo.fY);
 
 	POS pos = { fX, fY };
 
