@@ -2,9 +2,9 @@
 
 #include "framework.h"
 
-#define			WINCX		600
+#define			WINCX		700
 #define			WINCY		800
-#define			FRAME_SIZE	100
+#define			FRAME_SIZE	20
 
 #define			PURE		= 0
 
@@ -21,6 +21,10 @@
 
 #define			ITEMCX		20
 #define			ITEMCY		20
+
+#define			ASSISTCX	20
+#define			ASSISTCY	20
+#define			ASSIST_GUN_SIZE		50
 
 #define			SUPCX		40
 #define			SUPCY		20
@@ -40,7 +44,7 @@ typedef struct tagInfo
 } INFO;
 
 enum DIRECTION { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_END};
-enum OBJID {OBJ_PLAYER, OBJ_MONSTER, OBJ_BULLET, OBJ_NPC, OBJ_ITEM, OBJ_SPLY, OBJ_END};
+enum OBJID {OBJ_PLAYER, OBJ_MONSTER, OBJ_BULLET, OBJ_NPC, OBJ_ITEM, OBJ_SPLY, OBJ_ITEMEFFECT, OBJ_END};
 
 enum BULLET_TYPE { BULLET_NORMAL, BULLET_SPECIAL, BULLET_END};
 

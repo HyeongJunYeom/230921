@@ -16,14 +16,18 @@ public:
 	void		Render(HDC hDC) const	override;
 
 	void		Crash(CObj* _pOther) override;
-	void		Set_Dim(int _iDimention) { m_iDimention = _iDimention; }
+	void		Set_Dim(float _fDimention)
+	{ 
+		m_fAngle = _fDimention; 
+		m_fBulletDim = m_fAngle;
+	}
 	void		Set_Type(BULLET_TYPE _eType) 
 	{
 		m_eBulletType = _eType; 
 
 		if (BULLET_SPECIAL == m_eBulletType)
 		{
-			m_fSpeed = 3.f;
+			m_fSpeed = 8.f;
 			m_tInfoTemp.fCX = 40;
 			m_tInfoTemp.fCY = 40;
 
@@ -41,11 +45,11 @@ private:
 	void		Calculate_SpecialBullet();
 
 private:
-	int					m_iDimention;
+	float				m_fAngle;
 	BULLET_TYPE			m_eBulletType;
 	RECT				m_tRectTemp;
 	INFO				m_tInfoTemp;
 
-	int					m_iBulletDim;
+	float				m_fBulletDim;
 };
 

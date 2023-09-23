@@ -73,11 +73,11 @@ void CPlayer::Key_Input()
 		}
 		else
 			m_tInfo.fX += m_fSpeed;*/
-		if (360 <= m_iDimention)
+		if (180 <= m_iDimention)
 		{
 			m_iDimention -= 360;
 		}
-		++m_iDimention;
+		m_iDimention += 5;
 	}
 
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
@@ -95,11 +95,11 @@ void CPlayer::Key_Input()
 		else
 			m_tInfo.fX -= m_fSpeed;*/
 
-		if (0 >= m_iDimention)
+		if (-180 >= m_iDimention)
 		{
 			m_iDimention += 360;
 		}
-		--m_iDimention;
+		m_iDimention -= 5;
 	}
 
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
@@ -107,13 +107,14 @@ void CPlayer::Key_Input()
 		//	³ôÀÌ = ºøº¯ * sin µð¸à¼Ç
 
 		//	¹Øº¯ = ºøº¯ * cos dimention
-		m_tInfo.fX += m_fSpeed * cos(m_iDimention * PI / 180);
-		m_tInfo.fY += m_fSpeed * sin(m_iDimention * PI / 180);
+		m_tInfo.fX -= m_fSpeed * cos(m_iDimention * PI / 180);
+		m_tInfo.fY -= m_fSpeed * sin(m_iDimention * PI / 180);
 	}
 
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 	{
-		m_tInfo.fY += m_fSpeed;
+		m_tInfo.fX += m_fSpeed * cos(m_iDimention * PI / 180);
+		m_tInfo.fY += m_fSpeed * sin(m_iDimention * PI / 180);
 	}
 
 	/*if (GetAsyncKeyState(VK_UP) & 0x8000)
@@ -193,8 +194,8 @@ CObj* CPlayer::Create_Bullet(DIRECTION _eDir)
 
 POS CPlayer::Calculate_GunPos()
 {
-	float fX = ((cos(double(m_iDimention * PI / 180)) * (float)GUN_SIZE) + m_tInfo.fX);
-	float fY = ((sin(double(m_iDimention * PI / 180)) * (float)GUN_SIZE) + m_tInfo.fY);
+	float fX = (-(cos(m_iDimention * PI / 180) * (float)GUN_SIZE) + m_tInfo.fX);
+	float fY = (-(sin(m_iDimention * PI / 180) * (float)GUN_SIZE) + m_tInfo.fY);
 
 	POS pos = { fX, fY };
 

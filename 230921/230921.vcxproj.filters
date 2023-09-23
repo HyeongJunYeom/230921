@@ -58,6 +58,18 @@
     <Filter Include="소스 파일\01. Obj\05. SupplyPlane">
       <UniqueIdentifier>{7c8e25de-f48f-417b-839d-605bb5c280f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Obj\04. Item\01. SheildItem">
+      <UniqueIdentifier>{39f44e2a-7b66-44f1-b779-2dddc7287815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Obj\05. ItemEffect">
+      <UniqueIdentifier>{0725ee65-e08d-4a8d-918d-e4f2b68a4a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Obj\05. ItemEffect\00. AssistPlayer">
+      <UniqueIdentifier>{6694f85d-e1ef-4e71-a93c-4e30c630b961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Obj\05. ItemEffect\01. Shiled">
+      <UniqueIdentifier>{2361bc71-a0e2-4bc0-b989-1dfa97ea0b22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -102,7 +114,7 @@
     <ClInclude Include="Item.h">
       <Filter>소스 파일\01. Obj\04. Item</Filter>
     </ClInclude>
-    <ClInclude Include="AssistPlayer.h">
+    <ClInclude Include="AssistPlayerItem.h">
       <Filter>소스 파일\01. Obj\04. Item\00. AssistPlayer</Filter>
     </ClInclude>
     <ClInclude Include="Interface.h">
@@ -119,6 +131,18 @@
     </ClInclude>
     <ClInclude Include="SupplyPlane.h">
       <Filter>소스 파일\01. Obj\05. SupplyPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="ShieldItem.h">
+      <Filter>소스 파일\01. Obj\04. Item\01. SheildItem</Filter>
+    </ClInclude>
+    <ClInclude Include="AssistPlayer.h">
+      <Filter>소스 파일\01. Obj\05. ItemEffect\00. AssistPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemEffect.h">
+      <Filter>소스 파일\01. Obj\05. ItemEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>소스 파일\01. Obj\05. ItemEffect\01. Shiled</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -149,7 +173,7 @@
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\01. Obj\04. Item</Filter>
     </ClCompile>
-    <ClCompile Include="AssistPlayer.cpp">
+    <ClCompile Include="AssistPlayerItem.cpp">
       <Filter>소스 파일\01. Obj\04. Item\00. AssistPlayer</Filter>
     </ClCompile>
     <ClCompile Include="Interface.cpp">
@@ -166,6 +190,18 @@
     </ClCompile>
     <ClCompile Include="SupplyPlane.cpp">
       <Filter>소스 파일\01. Obj\05. SupplyPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="ShieldItem.cpp">
+      <Filter>소스 파일\01. Obj\04. Item\01. SheildItem</Filter>
+    </ClCompile>
+    <ClCompile Include="AssistPlayer.cpp">
+      <Filter>소스 파일\01. Obj\05. ItemEffect\00. AssistPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemEffect.cpp">
+      <Filter>소스 파일\01. Obj\05. ItemEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>소스 파일\01. Obj\05. ItemEffect\01. Shiled</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

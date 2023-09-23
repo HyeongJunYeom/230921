@@ -4,7 +4,7 @@
 #include "Monster.h"
 
 CBullet::CBullet()
-	: m_iDimention(0), m_eBulletType(BULLET_END)
+	: m_fAngle(0), m_eBulletType(BULLET_END)
 {
 	ZeroMemory(&m_tRect, sizeof(RECT));
 	ZeroMemory(&m_tInfo, sizeof(INFO));
@@ -30,18 +30,19 @@ int CBullet::Update()
 
 	if (BULLET_NORMAL == m_eBulletType)
 	{
-		m_tInfo.fX += cos(m_iDimention * PI / 180) * m_fSpeed;
-		m_tInfo.fY += sin(m_iDimention * PI / 180) * m_fSpeed;
+		m_tInfo.fX -= cos(m_fAngle * PI / 180) * m_fSpeed;
+		m_tInfo.fY -= sin(m_fAngle * PI / 180) * m_fSpeed;
 	}
 
 	if (BULLET_SPECIAL == m_eBulletType)
 	{
-		m_iBulletDim += 30;
-		m_tInfoTemp.fX	+= cos(m_iDimention * PI / 180) * m_fSpeed;
-		m_tInfoTemp.fY  += sin(m_iDimention * PI / 180) * m_fSpeed;
+		m_fSpeed = 3.f;
+		m_fBulletDim += 30;
+		m_tInfoTemp.fX	-= cos(m_fAngle * PI / 180) * m_fSpeed;
+		m_tInfoTemp.fY  -= sin(m_fAngle * PI / 180) * m_fSpeed;
 
-		m_tInfo.fX = ((cos(double(m_iBulletDim * PI / 180)) * (m_tInfoTemp.fCX * 0.5f) + m_tInfoTemp.fX));
-		m_tInfo.fY = ((sin(double(m_iBulletDim * PI / 180)) * (m_tInfoTemp.fCY * 0.5f) + m_tInfoTemp.fY));
+		m_tInfo.fX = ((cos(double(m_fBulletDim * PI / 180)) * (m_tInfoTemp.fCX * 0.5f) + m_tInfoTemp.fX));
+		m_tInfo.fY = ((sin(double(m_fBulletDim * PI / 180)) * (m_tInfoTemp.fCY * 0.5f) + m_tInfoTemp.fY));
 	}
 
 	__super::Update_Rect();
@@ -75,7 +76,7 @@ void CBullet::Crash(CObj* _pOther)
 
 	}
 
-	if (pMonster)
+	/*if (pMonster)
 	{
 		bool bResult = false;
 		RECT tRect;
@@ -83,7 +84,7 @@ void CBullet::Crash(CObj* _pOther)
 
 		if (bResult)
 			m_bDead = true;
-	}
+	}*/
 }
 
 void CBullet::Calculate_SpecialBullet()

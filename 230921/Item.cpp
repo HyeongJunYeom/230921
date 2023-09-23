@@ -19,6 +19,7 @@ void CItem::Initialize()
 	m_tInfo.fCX = ITEMCX;
 	m_tInfo.fCY = ITEMCY;
 
+	m_fSpeed = 5.f;
 }
 
 int CItem::Update()
@@ -30,7 +31,10 @@ int CItem::Update()
 
 void CItem::LateUpdate()
 {
-	
+	if (FRAME_SIZE >= m_tRect.top)
+	{
+
+	}
 }
 
 void CItem::Release()

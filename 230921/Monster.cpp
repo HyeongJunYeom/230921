@@ -22,7 +22,7 @@ void CMonster::Initialize()
 	m_tInfo.fX = FRAME_SIZE + m_tInfo.fCX * 0.5;
 	m_tInfo.fY = FRAME_SIZE + m_tInfo.fCY * 0.5;
 
-	m_fSpeed = 10.f;
+	m_fSpeed = 3.f;
 }
 
 int CMonster::Update()
